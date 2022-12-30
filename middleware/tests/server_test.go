@@ -1,0 +1,105 @@
+package tests
+
+import (
+	"context"
+	"errors"
+	"fmt"
+	"time"
+
+	"github.com/go-bricks/bricks/interfaces/cfg"
+	confkeys "github.com/go-bricks/bricks/interfaces/cfg/keys"
+	mock_cfg "github.com/go-bricks/bricks/interfaces/cfg/mock"
+	"github.com/go-bricks/bricks/interfaces/log"
+	"github.com/go-bricks/bricks/interfaces/monitor"
+	mock_monitor "github.com/go-bricks/bricks/interfaces/monitor/mock"
+	"github.com/go-bricks/bricks/logger/naive"
+	"github.com/go-bricks/bricks/middleware/interceptors/server"
+	"github.com/golang/mock/gomock"
+	"go.uber.org/fx"
+	"google.golang.org/grpc"
+)
+
+func (s *middlewareSuite) TestLoggerGRPCInterceptor() {
+	unaryHandler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return "response", nil
+	}
+	ctxWithDeadline, cancel := context.WithTimeout(context.Background(), time.Second)
+	defer cancel()
+	_, err := s.serverInterceptor(ctxWithDeadline, nil, &grpc.UnaryServerInfo{FullMethod: "fake method"}, unaryHandler)
+	s.NoError(err)
+	s.Contains(s.loggerOutput.String(), "gRPC call finished")
+}
+
+func (s *middlewareSuite) TestLoggerGRPCInterceptorWithError() {
+	unaryHandler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return nil, errors.New("")
+	}
+	ctxWithDeadline, cancel := context.WithTimeout(context.Background(), time.Second)
+	defer cancel()
+	_, err := s.serverInterceptor(ctxWithDeadline, nil, &grpc.UnaryServerInfo{FullMethod: "fake method"}, unaryHandler)
+	s.Error(err)
+}
+
+func (s *middlewareSuite) testLoggerGRPCInterceptorBeforeTest(hasError bool) fx.Option {
+	s.cfgMock.EXPECT().Get(confkeys.MiddlewareLogLevel).DoAndReturn(func(key string) cfg.Value {
+		value := mock_cfg.NewMockValue(s.ctrl)
+		value.EXPECT().IsSet().Return(true)
+		value.EXPECT().String().Return("debug")
+		return value
+	})
+
+	if hasError {
+		s.cfgMock.EXPECT().Get(confkeys.MiddlewareOnErrorLogLevel).DoAndReturn(func(key string) cfg.Value {
+			value := mock_cfg.NewMockValue(s.ctrl)
+			value.EXPECT().IsSet().Return(true)
+			value.EXPECT().String().Return("warn")
+			return value
+		})
+	}
+
+	s.cfgMock.EXPECT().Get(confkeys.MiddlewareLogIncludeRequest).DoAndReturn(func(key string) cfg.Value {
+		value := mock_cfg.NewMockValue(s.ctrl)
+		value.EXPECT().Bool().Return(true)
+		return value
+	})
+
+	s.cfgMock.EXPECT().Get(confkeys.MiddlewareLogIncludeResponse).DoAndReturn(func(key string) cfg.Value {
+		value := mock_cfg.NewMockValue(s.ctrl)
+		value.EXPECT().Bool().Return(true)
+		return value
+	})
+
+	return fx.Options(
+		fx.Provide(server.LoggerGRPCInterceptor),
+		fx.Provide(func() log.Logger {
+			return naive.Builder().SetWriter(&s.loggerOutput).SetLevel(log.DebugLevel).Build()
+		}),
+		fx.Populate(&s.serverInterceptor),
+	)
+}
+
+func (s *middlewareSuite) TestMonitorGRPCInterceptor() {
+	unaryHandler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return "response", fmt.Errorf("some error")
+	}
+	_, err := s.serverInterceptor(context.Background(), nil, &grpc.UnaryServerInfo{FullMethod: "package.service/method"}, unaryHandler)
+	s.Error(err)
+}
+
+func (s *middlewareSuite) testMonitorGRPCInterceptorBeforeTest() fx.Option {
+	return fx.Options(
+		fx.Provide(server.MonitorGRPCInterceptor),
+		fx.Provide(func() log.Logger {
+			return naive.Builder().SetWriter(&s.loggerOutput).SetLevel(log.DebugLevel).Build()
+		}),
+		fx.Provide(func() monitor.Metrics {
+			mockedTimer := mock_monitor.NewMockTagsAwareTimer(s.ctrl)
+			mockedTimer.EXPECT().Record(gomock.AssignableToTypeOf(time.Second)) // assignable to duration
+			mockMetrics := mock_monitor.NewMockMetrics(s.ctrl)
+			mockMetrics.EXPECT().WithTags(monitor.Tags{"code": "2"}).Return(mockMetrics)
+			mockMetrics.EXPECT().Timer("grpc_method", gomock.Any()).Return(mockedTimer) // method is from the above unary info
+			return mockMetrics
+		}),
+		fx.Populate(&s.serverInterceptor),
+	)
+}
