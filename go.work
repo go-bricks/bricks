@@ -18,7 +18,7 @@ replace (
 	github.com/go-bricks/bricks-template v0.0.1 => ../bricks-template
 	github.com/go-bricks/bviper v0.0.1 => ../bviper
 	github.com/go-bricks/bzerolog v0.0.1 => ../bzerolog
-	github.com/go-bricks/bricks-demo/workshop v0.0.0-20201116100640-4a178a4540e1 => ../bricks-demo/workshop
+	github.com/go-bricks/bricks-demo/workshop v0.0.0-20211102110000-000000000000 => ../bricks-demo/workshop
 	github.com/go-bricks/bricks-demo/subworkshop v0.0.1 => ../bricks-demo/subworkshop
 )
 
