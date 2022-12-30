@@ -7,10 +7,10 @@ import (
 	"github.com/go-bricks/bricks/logger"
 	"github.com/go-bricks/bricks/logger/naive"
 
+	"github.com/go-bricks/bricks/bricks"
 	"github.com/go-bricks/bricks/interfaces/cfg"
 	confkeys "github.com/go-bricks/bricks/interfaces/cfg/keys"
 	logInt "github.com/go-bricks/bricks/interfaces/log"
-	"github.com/go-bricks/bricks/bricks"
 
 	"go.uber.org/fx"
 )

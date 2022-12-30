@@ -8,11 +8,11 @@ import (
 	"os"
 	"strings"
 
+	"github.com/go-bricks/bricks/bricks"
 	"github.com/go-bricks/bricks/constructors/partial"
 	"github.com/go-bricks/bricks/interfaces/cfg"
 	confkeys "github.com/go-bricks/bricks/interfaces/cfg/keys"
 	"github.com/go-bricks/bricks/interfaces/log"
-	"github.com/go-bricks/bricks/bricks"
 	"github.com/go-bricks/bricks/utils"
 	"go.uber.org/fx"
 )
