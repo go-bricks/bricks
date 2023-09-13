@@ -3,6 +3,7 @@ package server
 import (
 	"container/list"
 	"context"
+	"github.com/go-bricks/bricks/utils"
 	"net"
 	"net/http"
 
@@ -124,6 +125,7 @@ func (r *restBuilder) BuildRESTPart() server.GRPCWebServiceBuilder {
 
 type grpcConfig struct {
 	addr         string
+	tlsCfg       *server.TlsConfig
 	server       *grpc.Server
 	listener     net.Listener
 	registerAPI  []server.GRPCServerAPI
@@ -149,6 +151,18 @@ func Builder() server.GRPCWebServiceBuilder {
 func (s *serviceBuilder) ListenOn(addr string) server.GRPCWebServiceBuilder {
 	s.ll.PushBack(func(cfg *webServiceConfig) {
 		cfg.grpc.addr = addr
+	})
+	return s
+}
+
+func (s *serviceBuilder) SetTlsConfig(enableTls bool, CaCertFile string, ServerKeyFile string, ServerCertFile string) server.GRPCWebServiceBuilder {
+	s.ll.PushBack(func(cfg *webServiceConfig) {
+		cfg.grpc.tlsCfg = &server.TlsConfig{
+			EnableTLS:      enableTls,
+			CaCertFile:     CaCertFile,
+			ServerKeyFile:  ServerKeyFile,
+			ServerCertFile: ServerCertFile,
+		}
 	})
 	return s
 }
@@ -217,6 +231,16 @@ func (s *serviceBuilder) Build() (server.WebService, error) {
 	if cfg.grpc.panicHandler == nil {
 		cfg.grpc.panicHandler = defaultPanicHandler
 	}
+
+	if cfg.grpc.tlsCfg.EnableTLS && cfg.grpc.tlsCfg.CaCertFile != "" && cfg.grpc.tlsCfg.ServerKeyFile != "" && cfg.grpc.tlsCfg.ServerCertFile != "" {
+		tlsCredentials, err := utils.LoadTLSCredentials(cfg.grpc.tlsCfg.CaCertFile, cfg.grpc.tlsCfg.ServerKeyFile, cfg.grpc.tlsCfg.ServerCertFile)
+		if err == nil {
+			cfg.grpc.options = append([]grpc.ServerOption{ // make sure they are outer most
+				grpc.Creds(tlsCredentials),
+			}, cfg.grpc.options...)
+		}
+	}
+
 	cfg.grpc.options = append([]grpc.ServerOption{ // make sure they are outer most
 		grpc.ChainUnaryInterceptor(panicHandlerUnaryInterceptor(cfg.grpc.panicHandler)),
 		grpc.ChainStreamInterceptor(panicHandlerStreamInterceptor(cfg.grpc.panicHandler)),

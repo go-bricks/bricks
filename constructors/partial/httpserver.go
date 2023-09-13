@@ -2,6 +2,7 @@ package partial
 
 import (
 	"fmt"
+	"github.com/go-bricks/bricks/utils"
 	"net/http"
 
 	"github.com/go-bricks/bricks/http/server"
@@ -87,6 +88,25 @@ func HTTPServerBuilder(deps httpServerDeps) serverInt.GRPCWebServiceBuilder {
 	if grpcPort := deps.Config.Get(confkeys.ExternalGRPCPort); grpcPort.IsSet() {
 		builder = builder.ListenOn(fmt.Sprintf("%s:%d", host, grpcPort.Int()))
 	}
+
+	if tlsConfig := deps.Config.Get(confkeys.GRPCTlsConfig); tlsConfig.IsSet() {
+		if enableTls := deps.Config.Get(confkeys.EnableGRPCTls); enableTls.IsSet() && enableTls.Bool() {
+			CaCertFile := deps.Config.Get(confkeys.GRPCTlsCACertFile)
+			ServerKeyFile := deps.Config.Get(confkeys.GRPCTlsServerKeyFile)
+			ServerCertFile := deps.Config.Get(confkeys.GRPCTlsServerCertFile)
+			if CaCertFile.IsSet() && ServerKeyFile.IsSet() && ServerCertFile.IsSet() {
+				cafn := CaCertFile.String()
+				skfn := ServerKeyFile.String()
+				scfn := ServerCertFile.String()
+				builder = builder.SetTlsConfig(true, cafn, skfn, scfn)
+				tlsCredentials, err := utils.LoadTLSCredentials(cafn, skfn, scfn)
+				if err == nil {
+					builder = builder.AddGRPCServerOptions(grpc.Creds(tlsCredentials))
+				}
+			}
+		}
+	}
+
 	// GRPC server interceptors
 	if len(deps.UnaryInterceptors) > 0 {
 		interceptorsOption := grpc.ChainUnaryInterceptor(deps.UnaryInterceptors...)

@@ -28,11 +28,20 @@ type ListenInfo struct {
 	Type    WebServerType `json:"type"`
 }
 
+// TlsConfig defines tls configuration
+type TlsConfig struct {
+	EnableTLS      bool   `json:"enableTLS"`
+	CaCertFile     string `json:"caCertFile"`
+	ServerKeyFile  string `json:"serverKeyFile"`
+	ServerCertFile string `json:"serverCertFile"`
+}
+
 // WebService defines our web service functions
 type WebService interface {
 	Run(ctx context.Context) error
 	Stop(ctx context.Context) error
 	Ports() []ListenInfo
+	TlsConfig() *TlsConfig
 }
 
 // GRPCServerAPI alias for gRPC API function registration
@@ -41,6 +50,7 @@ type GRPCServerAPI func(server *grpc.Server)
 // GRPCWebServiceBuilder defines gRPC web service builder options
 type GRPCWebServiceBuilder interface {
 	ListenOn(addr string) GRPCWebServiceBuilder
+	SetTlsConfig(enableTls bool, CaCertFile string, ServerKeyFile string, ServerCertFile string) GRPCWebServiceBuilder
 	SetCustomGRPCServer(customServer *grpc.Server) GRPCWebServiceBuilder
 	SetCustomListener(listener net.Listener) GRPCWebServiceBuilder
 	RegisterGRPCAPIs(register ...GRPCServerAPI) GRPCWebServiceBuilder

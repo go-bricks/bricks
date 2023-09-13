@@ -22,6 +22,7 @@ type webService struct {
 	serviceConfig   *webServiceConfig
 	grpcServer      *grpc.Server
 	grpcAddr        string
+	tlsConfig       *server.TlsConfig
 	muxAndListeners []*listenerMuxPair
 	close           bool
 }
@@ -122,6 +123,10 @@ func (ws *webService) Ports() (list []server.ListenInfo) {
 	return
 }
 
+func (ws *webService) TlsConfig() *server.TlsConfig {
+	return ws.tlsConfig
+}
+
 func (ws *webService) setupGRPC(cfg *grpcConfig) (err error) {
 	if cfg.registerAPI == nil {
 		err = fmt.Errorf("no GRPC APIs registered, make sure to call 'RegisterGRPCAPIs' when building")
@@ -144,6 +149,7 @@ func (ws *webService) setupGRPC(cfg *grpcConfig) (err error) {
 		// save, since this should run first we have no problem with previous values
 		ws.muxAndListeners = append(ws.muxAndListeners, &listenerMuxPair{l: grpcListener, m: ws.grpcServer})
 		ws.grpcAddr = grpcListener.Addr().String() // we need this later for grpc gateway
+		ws.tlsConfig = cfg.tlsCfg
 	}
 	return
 }

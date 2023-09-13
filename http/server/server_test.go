@@ -41,6 +41,9 @@ func TestDefaultListeners(t *testing.T) {
 func TestListenOnAddresses(t *testing.T) {
 	service, err := Builder().
 		ListenOn("localhost:8888").
+		SetTlsConfig(true, "/ca-cert.pem",
+			"/server-key.pem",
+			"/server-cert.pem").
 		RegisterGRPCAPIs(registerGrpcAPI).
 		AddRESTServerConfiguration().
 		ListenOn("localhost:8887").
