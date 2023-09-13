@@ -73,6 +73,40 @@ func (s *partialSuite) SetupTest() {
 		value.EXPECT().Int().Return(1234)
 		return value
 	})
+	// grpc tls config
+	s.cfgMock.EXPECT().Get(confkeys.GRPCTlsConfig).DoAndReturn(func(key string) cfg.Value {
+		value := mock_cfg.NewMockValue(s.ctrl)
+		value.EXPECT().IsSet().Return(true)
+		return value
+	})
+	// grpc tls enabled
+	s.cfgMock.EXPECT().Get(confkeys.EnableGRPCTls).DoAndReturn(func(key string) cfg.Value {
+		value := mock_cfg.NewMockValue(s.ctrl)
+		value.EXPECT().IsSet().Return(true)
+		value.EXPECT().Bool().Return(true)
+		return value
+	})
+	// grpc tls caCertFile
+	s.cfgMock.EXPECT().Get(confkeys.GRPCTlsCACertFile).DoAndReturn(func(key string) cfg.Value {
+		value := mock_cfg.NewMockValue(s.ctrl)
+		value.EXPECT().IsSet().Return(true)
+		value.EXPECT().String().Return("testCAcertFile")
+		return value
+	})
+	// grpc tls caCertFile
+	s.cfgMock.EXPECT().Get(confkeys.GRPCTlsServerKeyFile).DoAndReturn(func(key string) cfg.Value {
+		value := mock_cfg.NewMockValue(s.ctrl)
+		value.EXPECT().IsSet().Return(true)
+		value.EXPECT().String().Return("testServerKeyFile")
+		return value
+	})
+	// grpc tls caCertFile
+	s.cfgMock.EXPECT().Get(confkeys.GRPCTlsServerCertFile).DoAndReturn(func(key string) cfg.Value {
+		value := mock_cfg.NewMockValue(s.ctrl)
+		value.EXPECT().IsSet().Return(true)
+		value.EXPECT().String().Return("testServerCertFile")
+		return value
+	})
 	// host
 	s.cfgMock.EXPECT().Get(confkeys.Host).DoAndReturn(func(key string) cfg.Value {
 		value := mock_cfg.NewMockValue(s.ctrl)

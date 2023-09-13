@@ -3,6 +3,7 @@ package constructors
 import (
 	"context"
 	"fmt"
+	"github.com/go-bricks/bricks/utils"
 
 	"github.com/go-bricks/bricks/http/server/health"
 	"github.com/go-bricks/bricks/interfaces/http/server"
@@ -40,9 +41,22 @@ func Service(deps webServiceDependencies) (server.WebService, error) {
 func (deps webServiceDependencies) pingService(ctx context.Context, service server.WebService) (err error) {
 	err = fmt.Errorf("failed to check internal service health")
 	ports := service.Ports()
+	tlsCfg := service.TlsConfig()
 	if grpcAddress := deps.getGRPCAddress(ports); len(grpcAddress) > 0 {
 		var conn *grpc.ClientConn
-		if conn, err = grpc.DialContext(ctx, grpcAddress, grpc.WithInsecure()); err == nil {
+		transportOption := grpc.WithInsecure()
+		if tlsCfg.EnableTLS {
+			deps.Logger.Debug(ctx, "grpc TLS enabled")
+			tlsCredentials, err := utils.LoadTLSCredentials(tlsCfg.CaCertFile, tlsCfg.ServerKeyFile, tlsCfg.ServerCertFile)
+			if err != nil {
+				deps.Logger.Debug(ctx, fmt.Sprintf("error to configure tls connection, err: %s", err.Error()))
+			} else {
+				transportOption = grpc.WithTransportCredentials(tlsCredentials)
+			}
+		} else {
+			deps.Logger.Debug(ctx, "grpc TLS disabled")
+		}
+		if conn, err = grpc.DialContext(ctx, grpcAddress, transportOption); err == nil {
 			defer conn.Close()
 			healthClient := health.NewHealthClient(conn)
 			_, err = healthClient.Check(ctx, &health.HealthCheckRequest{})

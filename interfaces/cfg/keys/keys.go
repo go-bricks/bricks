@@ -26,6 +26,8 @@ const (
 const (
 	// Webserver -> gRPC related configuration
 	gRPC = server + ".grpc"
+	// GRPCTlsConfig Webserver -> gRPC -> tlsConfig related configuration
+	GRPCTlsConfig = gRPC + ".tlsConfig"
 	// Webserver -> RESTful related configuration
 	rest = server + ".rest"
 
@@ -38,6 +40,26 @@ const (
 	//
 	// Type: int
 	ExternalGRPCPort string = gRPC + ".port"
+
+	// EnableGRPCTls if true grpc use tls mutual authentication connection
+	//
+	// Type: bool
+	EnableGRPCTls string = GRPCTlsConfig + ".enableTLS"
+
+	// GRPCTlsCACertFile is CA certificate file path
+	//
+	// Type: string
+	GRPCTlsCACertFile string = GRPCTlsConfig + ".caCertFile"
+
+	// GRPCTlsServerKeyFile is server key file path
+	//
+	// Type: string
+	GRPCTlsServerKeyFile string = GRPCTlsConfig + ".serverKeyFile"
+
+	// GRPCTlsServerCertFile is server certificate file path
+	//
+	// Type: string
+	GRPCTlsServerCertFile string = GRPCTlsConfig + ".serverCertFile"
 
 	// ExternalRESTPort is the Port on which the webserver will serve it's external/public RESTful API
 	//
