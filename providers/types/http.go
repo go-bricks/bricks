@@ -1,6 +1,6 @@
 package types
 
-import "github.com/go-bricks/bricks/constructors/partial"
+import "github.com/go-bricks/bricks/v2/constructors/partial"
 
 // HTTPHandlerPatternPair defines pattern -> handler pair
 //

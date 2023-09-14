@@ -3,9 +3,8 @@ package trace
 import (
 	"context"
 
-	"github.com/go-bricks/bricks/interfaces/cfg"
-	"github.com/go-bricks/bricks/interfaces/log"
-	"github.com/go-bricks/bricks/utils"
+	"github.com/go-bricks/bricks/v2/interfaces/cfg"
+	"github.com/go-bricks/bricks/v2/interfaces/log"
 	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"
 	traceLog "github.com/opentracing/opentracing-go/log"

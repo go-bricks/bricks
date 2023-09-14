@@ -3,10 +3,10 @@ package tests
 import (
 	"context"
 
-	"github.com/go-bricks/bricks/interfaces/cfg"
-	confkeys "github.com/go-bricks/bricks/interfaces/cfg/keys"
-	mock_cfg "github.com/go-bricks/bricks/interfaces/cfg/mock"
-	contextMiddleware "github.com/go-bricks/bricks/middleware/context"
+	"github.com/go-bricks/bricks/v2/interfaces/cfg"
+	confkeys "github.com/go-bricks/bricks/v2/interfaces/cfg/keys"
+	mock_cfg "github.com/go-bricks/bricks/v2/interfaces/cfg/mock"
+	contextMiddleware "github.com/go-bricks/bricks/v2/middleware/context"
 	"go.uber.org/fx"
 	"google.golang.org/grpc/metadata"
 )

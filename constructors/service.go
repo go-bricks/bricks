@@ -3,11 +3,10 @@ package constructors
 import (
 	"context"
 	"fmt"
-	"github.com/go-bricks/bricks/utils"
-
-	"github.com/go-bricks/bricks/http/server/health"
-	"github.com/go-bricks/bricks/interfaces/http/server"
-	"github.com/go-bricks/bricks/interfaces/log"
+	"github.com/go-bricks/bricks/v2/http/server/health"
+	"github.com/go-bricks/bricks/v2/interfaces/http/server"
+	"github.com/go-bricks/bricks/v2/interfaces/log"
+	"github.com/go-bricks/bricks/v2/utils"
 	"go.uber.org/fx"
 	"google.golang.org/grpc"
 )

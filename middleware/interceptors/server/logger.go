@@ -4,10 +4,9 @@ import (
 	"context"
 	"time"
 
-	"github.com/go-bricks/bricks/interfaces/cfg"
-	confkeys "github.com/go-bricks/bricks/interfaces/cfg/keys"
-	"github.com/go-bricks/bricks/interfaces/log"
-	"github.com/go-bricks/bricks/utils"
+	"github.com/go-bricks/bricks/v2/interfaces/cfg"
+	confkeys "github.com/go-bricks/bricks/v2/interfaces/cfg/keys"
+	"github.com/go-bricks/bricks/v2/interfaces/log"
 	"go.uber.org/fx"
 	"google.golang.org/grpc"
 )

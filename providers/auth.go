@@ -1,7 +1,6 @@
 package providers
 
 import (
-	"github.com/go-bricks/bricks/constructors"
 	"go.uber.org/fx"
 )
 

@@ -4,7 +4,6 @@ import (
 	"context"
 	"testing"
 
-	"github.com/go-bricks/bricks/constructors"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc/metadata"
 )

@@ -3,7 +3,7 @@ package trace
 import (
 	"context"
 
-	confkeys "github.com/go-bricks/bricks/interfaces/cfg/keys"
+	confkeys "github.com/go-bricks/bricks/v2/interfaces/cfg/keys"
 	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"
 	"google.golang.org/grpc"

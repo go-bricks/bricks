@@ -4,7 +4,7 @@ import (
 	"container/list"
 	"net/http"
 
-	"github.com/go-bricks/bricks/interfaces/http/client"
+	"github.com/go-bricks/bricks/v2/interfaces/http/client"
 )
 
 type restBuilderConfig struct {

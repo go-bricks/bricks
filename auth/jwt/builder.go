@@ -7,7 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/go-bricks/bricks/interfaces/auth/jwt"
+	"github.com/go-bricks/bricks/v2/interfaces/auth/jwt"
 )
 
 // JSONDecoder json.Unmarshaler

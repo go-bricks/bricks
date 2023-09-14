@@ -8,9 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/go-bricks/bricks/http/server/health"
-	demopackage "github.com/go-bricks/bricks/http/server/proto"
-	"github.com/go-bricks/bricks/interfaces/http/server"
+	"github.com/go-bricks/bricks/v2/http/server/health"
+	demopackage "github.com/go-bricks/bricks/v2/http/server/proto"
+	"github.com/go-bricks/bricks/v2/interfaces/http/server"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

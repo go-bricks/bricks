@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"testing"
 
-	logInt "github.com/go-bricks/bricks/interfaces/log"
-	mock_log "github.com/go-bricks/bricks/interfaces/log/mock"
-	"github.com/go-bricks/bricks/logger/naive"
+	logInt "github.com/go-bricks/bricks/v2/interfaces/log"
+	mock_log "github.com/go-bricks/bricks/v2/interfaces/log/mock"
+	"github.com/go-bricks/bricks/v2/logger/naive"
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/suite"
 )
