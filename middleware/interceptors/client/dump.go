@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"net/http/httputil"
 
-	"github.com/go-bricks/bricks/v2/interfaces/http/client"
-	"github.com/go-bricks/bricks/v2/interfaces/log"
+	"github.com/go-bricks/bricks/interfaces/http/client"
+	"github.com/go-bricks/bricks/interfaces/log"
 	"go.uber.org/fx"
 )
 

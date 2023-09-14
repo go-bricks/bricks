@@ -6,7 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/go-bricks/bricks/v2/interfaces/http/client"
+	"github.com/go-bricks/bricks/interfaces/http/client"
 	"github.com/stretchr/testify/require"
 )
 

@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/go-bricks/bricks/v2/interfaces/http/client"
-	"github.com/go-bricks/bricks/v2/interfaces/monitor"
+	"github.com/go-bricks/bricks/interfaces/http/client"
+	"github.com/go-bricks/bricks/interfaces/monitor"
 	"go.uber.org/fx"
 	"google.golang.org/grpc"
 )

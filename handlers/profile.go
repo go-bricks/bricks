@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http/pprof"
 
-	"github.com/go-bricks/bricks/v2/constructors/partial"
+	"github.com/go-bricks/bricks/constructors/partial"
 )
 
 const (

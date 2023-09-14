@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"net/http/httputil"
 
-	confkeys "github.com/go-bricks/bricks/v2/interfaces/cfg/keys"
-	"github.com/go-bricks/bricks/v2/interfaces/http/client"
+	confkeys "github.com/go-bricks/bricks/interfaces/cfg/keys"
+	"github.com/go-bricks/bricks/interfaces/http/client"
 	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"
 	"google.golang.org/grpc"

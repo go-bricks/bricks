@@ -1,8 +1,8 @@
 package groups
 
 import (
-	"github.com/go-bricks/bricks/v2/constructors"
-	"github.com/go-bricks/bricks/v2/constructors/partial"
+	"github.com/go-bricks/bricks/constructors"
+	"github.com/go-bricks/bricks/constructors/partial"
 )
 
 const (

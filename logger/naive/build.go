@@ -5,7 +5,7 @@ import (
 	"io"
 	"os"
 
-	logInt "github.com/go-bricks/bricks/v2/interfaces/log"
+	logInt "github.com/go-bricks/bricks/interfaces/log"
 )
 
 const defaultSkipDepth = 4

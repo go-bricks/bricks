@@ -3,7 +3,7 @@ package logger
 import (
 	"context"
 
-	"github.com/go-bricks/bricks/v2/interfaces/log"
+	"github.com/go-bricks/bricks/interfaces/log"
 )
 
 const (

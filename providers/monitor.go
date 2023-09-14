@@ -1,9 +1,9 @@
 package providers
 
 import (
-	"github.com/go-bricks/bricks/v2/constructors"
-	"github.com/go-bricks/bricks/v2/middleware/interceptors/server"
-	"github.com/go-bricks/bricks/v2/providers/groups"
+	"github.com/go-bricks/bricks/constructors"
+	"github.com/go-bricks/bricks/middleware/interceptors/server"
+	"github.com/go-bricks/bricks/providers/groups"
 	"go.uber.org/fx"
 )
 

@@ -6,9 +6,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/go-bricks/bricks/v2/interfaces/log"
-	"github.com/go-bricks/bricks/v2/interfaces/monitor"
-	"github.com/go-bricks/bricks/v2/utils"
+	"github.com/go-bricks/bricks/interfaces/log"
+	"github.com/go-bricks/bricks/interfaces/monitor"
+	"github.com/go-bricks/bricks/utils"
 	"go.uber.org/fx"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/status"

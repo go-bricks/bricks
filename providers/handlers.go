@@ -1,8 +1,8 @@
 package providers
 
 import (
-	"github.com/go-bricks/bricks/v2/handlers"
-	"github.com/go-bricks/bricks/v2/providers/groups"
+	"github.com/go-bricks/bricks/handlers"
+	"github.com/go-bricks/bricks/providers/groups"
 	"go.uber.org/fx"
 )
 

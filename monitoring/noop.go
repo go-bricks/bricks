@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/go-bricks/bricks/v2/interfaces/monitor"
+	"github.com/go-bricks/bricks/interfaces/monitor"
 )
 
 type noop struct {

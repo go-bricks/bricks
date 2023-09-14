@@ -2,12 +2,12 @@ package constructors
 
 import (
 	"context"
-	"github.com/go-bricks/bricks/v2/monitoring"
+	"github.com/go-bricks/bricks/monitoring"
 
-	"github.com/go-bricks/bricks/v2/interfaces/cfg"
-	confkeys "github.com/go-bricks/bricks/v2/interfaces/cfg/keys"
-	"github.com/go-bricks/bricks/v2/interfaces/log"
-	"github.com/go-bricks/bricks/v2/interfaces/monitor"
+	"github.com/go-bricks/bricks/interfaces/cfg"
+	confkeys "github.com/go-bricks/bricks/interfaces/cfg/keys"
+	"github.com/go-bricks/bricks/interfaces/log"
+	"github.com/go-bricks/bricks/interfaces/monitor"
 	"go.uber.org/fx"
 )
 

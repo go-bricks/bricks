@@ -4,7 +4,7 @@ import (
 	"container/list"
 	"context"
 
-	"github.com/go-bricks/bricks/v2/interfaces/http/client"
+	"github.com/go-bricks/bricks/interfaces/http/client"
 	"google.golang.org/grpc"
 )
 
