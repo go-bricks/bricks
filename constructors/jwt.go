@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/go-bricks/bricks/auth/jwt"
-	jwtInt "github.com/go-bricks/bricks/interfaces/auth/jwt"
+	"github.com/go-bricks/bricks/v2/auth/jwt"
+	jwtInt "github.com/go-bricks/bricks/v2/interfaces/auth/jwt"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc/metadata"
 )

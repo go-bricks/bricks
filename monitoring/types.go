@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/go-bricks/bricks/interfaces/monitor"
+	"github.com/go-bricks/bricks/v2/interfaces/monitor"
 )
 
 // *******************************************************************

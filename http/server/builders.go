@@ -3,11 +3,11 @@ package server
 import (
 	"container/list"
 	"context"
-	"github.com/go-bricks/bricks/utils"
+	"github.com/go-bricks/bricks/v2/utils"
 	"net"
 	"net/http"
 
-	"github.com/go-bricks/bricks/interfaces/http/server"
+	"github.com/go-bricks/bricks/v2/interfaces/http/server"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
 )

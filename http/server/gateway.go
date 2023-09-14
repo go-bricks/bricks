@@ -2,9 +2,9 @@ package server
 
 import (
 	"context"
+	"github.com/go-bricks/bricks/v2/utils"
 	"net/http"
 
-	"github.com/go-bricks/bricks/utils"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/opentracing/opentracing-go"
 	"go.uber.org/fx"

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/go-bricks/bricks/interfaces/monitor"
+	"github.com/go-bricks/bricks/v2/interfaces/monitor"
 )
 
 type bricksMetric struct {

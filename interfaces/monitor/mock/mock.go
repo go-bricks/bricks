@@ -9,7 +9,7 @@ import (
 	reflect "reflect"
 	time "time"
 
-	monitor "github.com/go-bricks/bricks/interfaces/monitor"
+	monitor "github.com/go-bricks/bricks/v2/interfaces/monitor"
 	gomock "github.com/golang/mock/gomock"
 )
 

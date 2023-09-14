@@ -10,7 +10,7 @@ import (
 	http "net/http"
 	reflect "reflect"
 
-	server "github.com/go-bricks/bricks/interfaces/http/server"
+	server "github.com/go-bricks/bricks/v2/interfaces/http/server"
 	gomock "github.com/golang/mock/gomock"
 	runtime "github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	grpc "google.golang.org/grpc"
