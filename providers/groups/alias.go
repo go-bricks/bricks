@@ -1,6 +1,7 @@
 package groups
 
 import (
+	"github.com/go-bricks/bricks/v2/constructors"
 	"github.com/go-bricks/bricks/v2/constructors/partial"
 )
 

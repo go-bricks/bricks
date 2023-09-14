@@ -4,8 +4,10 @@ import (
 	"context"
 	"log"
 
+	"github.com/go-bricks/bricks/v2/logger"
 	"github.com/go-bricks/bricks/v2/logger/naive"
 
+	"github.com/go-bricks/bricks/v2/bricks"
 	"github.com/go-bricks/bricks/v2/interfaces/cfg"
 	confkeys "github.com/go-bricks/bricks/v2/interfaces/cfg/keys"
 	logInt "github.com/go-bricks/bricks/v2/interfaces/log"
