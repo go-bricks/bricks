@@ -1,6 +1,6 @@
 # Bricks
 
-![Go](https://github.com/go-bricks/bricks/v2/workflows/Go/badge.svg)
+![Go](https://github.com/go-bricks/bricks/workflows/Go/badge.svg)
 [![codecov](https://codecov.io/gh/go-bricks/bricks/branch/master/graph/badge.svg)](https://codecov.io/gh/go-bricks/bricks)
 [![PkgGoDev](https://pkg.go.dev/badge/mod/github.com/go-bricks/bricks)](https://pkg.go.dev/mod/github.com/go-bricks/bricks)
 [![Go Report Card](https://goreportcard.com/badge/github.com/go-bricks/bricks)](https://goreportcard.com/report/github.com/go-bricks/bricks)

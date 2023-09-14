@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/go-bricks/bricks/v2/interfaces/auth/jwt"
+	"github.com/go-bricks/bricks/interfaces/auth/jwt"
 )
 
 type tokenExtractorImpl struct {

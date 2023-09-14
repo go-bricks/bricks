@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	logInt "github.com/go-bricks/bricks/v2/interfaces/log"
+	logInt "github.com/go-bricks/bricks/interfaces/log"
 	"github.com/stretchr/testify/assert"
 )
 

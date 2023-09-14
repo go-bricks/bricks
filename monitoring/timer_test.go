@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/go-bricks/bricks/v2/interfaces/monitor"
-	mock_monitor "github.com/go-bricks/bricks/v2/interfaces/monitor/mock"
+	"github.com/go-bricks/bricks/interfaces/monitor"
+	mock_monitor "github.com/go-bricks/bricks/interfaces/monitor/mock"
 	"github.com/golang/mock/gomock"
 )
 

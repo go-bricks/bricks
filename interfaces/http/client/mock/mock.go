@@ -9,7 +9,7 @@ import (
 	http "net/http"
 	reflect "reflect"
 
-	client "github.com/go-bricks/bricks/v2/interfaces/http/client"
+	client "github.com/go-bricks/bricks/interfaces/http/client"
 	gomock "github.com/golang/mock/gomock"
 	grpc "google.golang.org/grpc"
 )

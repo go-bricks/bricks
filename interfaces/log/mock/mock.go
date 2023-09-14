@@ -8,7 +8,7 @@ import (
 	context "context"
 	reflect "reflect"
 
-	log "github.com/go-bricks/bricks/v2/interfaces/log"
+	log "github.com/go-bricks/bricks/interfaces/log"
 	gomock "github.com/golang/mock/gomock"
 )
 

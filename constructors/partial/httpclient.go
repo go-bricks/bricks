@@ -1,8 +1,8 @@
 package partial
 
 import (
-	"github.com/go-bricks/bricks/v2/http/client"
-	clientInt "github.com/go-bricks/bricks/v2/interfaces/http/client"
+	"github.com/go-bricks/bricks/http/client"
+	clientInt "github.com/go-bricks/bricks/interfaces/http/client"
 	"go.uber.org/fx"
 	"google.golang.org/grpc"
 )

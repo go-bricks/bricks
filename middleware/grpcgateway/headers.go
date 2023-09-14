@@ -4,8 +4,8 @@ import (
 	"net/textproto"
 	"strings"
 
-	"github.com/go-bricks/bricks/v2/interfaces/cfg"
-	confkeys "github.com/go-bricks/bricks/v2/interfaces/cfg/keys"
+	"github.com/go-bricks/bricks/interfaces/cfg"
+	confkeys "github.com/go-bricks/bricks/interfaces/cfg/keys"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"go.uber.org/fx"
 )

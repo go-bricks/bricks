@@ -2,7 +2,7 @@ package server
 
 import (
 	"context"
-	"github.com/go-bricks/bricks/v2/utils"
+	"github.com/go-bricks/bricks/utils"
 	"net/http"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"

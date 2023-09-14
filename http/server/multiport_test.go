@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	demopackage "github.com/go-bricks/bricks/v2/http/server/proto"
-	serverInt "github.com/go-bricks/bricks/v2/interfaces/http/server"
+	demopackage "github.com/go-bricks/bricks/http/server/proto"
+	serverInt "github.com/go-bricks/bricks/interfaces/http/server"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/stretchr/testify/suite"
 	"google.golang.org/grpc"

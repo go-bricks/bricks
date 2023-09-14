@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"sync"
 
-	"github.com/go-bricks/bricks/v2/interfaces/http/server"
+	"github.com/go-bricks/bricks/interfaces/http/server"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
 )

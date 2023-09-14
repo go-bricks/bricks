@@ -11,9 +11,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/go-bricks/bricks/v2/http/client"
-	demopackage "github.com/go-bricks/bricks/v2/http/server/proto"
-	clientInterface "github.com/go-bricks/bricks/v2/interfaces/http/client"
+	"github.com/go-bricks/bricks/http/client"
+	demopackage "github.com/go-bricks/bricks/http/server/proto"
+	clientInterface "github.com/go-bricks/bricks/interfaces/http/client"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc/codes"

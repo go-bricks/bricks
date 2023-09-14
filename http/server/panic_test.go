@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	demopackage "github.com/go-bricks/bricks/v2/http/server/proto"
+	demopackage "github.com/go-bricks/bricks/http/server/proto"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"google.golang.org/grpc"

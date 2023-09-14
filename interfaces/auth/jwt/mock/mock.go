@@ -9,7 +9,7 @@ import (
 	base64 "encoding/base64"
 	reflect "reflect"
 
-	jwt "github.com/go-bricks/bricks/v2/interfaces/auth/jwt"
+	jwt "github.com/go-bricks/bricks/interfaces/auth/jwt"
 	gomock "github.com/golang/mock/gomock"
 )
 

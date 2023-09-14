@@ -4,9 +4,9 @@ import (
 	"context"
 	"strings"
 
-	"github.com/go-bricks/bricks/v2/interfaces/cfg"
-	confkeys "github.com/go-bricks/bricks/v2/interfaces/cfg/keys"
-	"github.com/go-bricks/bricks/v2/interfaces/log"
+	"github.com/go-bricks/bricks/interfaces/cfg"
+	confkeys "github.com/go-bricks/bricks/interfaces/cfg/keys"
+	"github.com/go-bricks/bricks/interfaces/log"
 	"go.uber.org/fx/fxevent"
 )
 

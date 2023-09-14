@@ -1,4 +1,4 @@
-module github.com/go-bricks/bricks/v2
+module github.com/go-bricks/bricks
 
 go 1.19
 

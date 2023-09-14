@@ -8,7 +8,7 @@ import (
 	reflect "reflect"
 	time "time"
 
-	cfg "github.com/go-bricks/bricks/v2/interfaces/cfg"
+	cfg "github.com/go-bricks/bricks/interfaces/cfg"
 	gomock "github.com/golang/mock/gomock"
 )
 
