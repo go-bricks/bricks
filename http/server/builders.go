@@ -232,7 +232,8 @@ func (s *serviceBuilder) Build() (server.WebService, error) {
 		cfg.grpc.panicHandler = defaultPanicHandler
 	}
 
-	if cfg.grpc.tlsCfg.EnableTLS && cfg.grpc.tlsCfg.CaCertFile != "" && cfg.grpc.tlsCfg.ServerKeyFile != "" && cfg.grpc.tlsCfg.ServerCertFile != "" {
+	if cfg.grpc.tlsCfg != nil && cfg.grpc.tlsCfg.EnableTLS && cfg.grpc.tlsCfg.CaCertFile != "" &&
+		cfg.grpc.tlsCfg.ServerKeyFile != "" && cfg.grpc.tlsCfg.ServerCertFile != "" {
 		tlsCredentials, err := utils.LoadTLSCredentials(cfg.grpc.tlsCfg.CaCertFile, cfg.grpc.tlsCfg.ServerKeyFile, cfg.grpc.tlsCfg.ServerCertFile)
 		if err == nil {
 			cfg.grpc.options = append([]grpc.ServerOption{ // make sure they are outer most
