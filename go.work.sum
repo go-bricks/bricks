@@ -1,4 +1,8 @@
 github.com/go-bricks/bjaeger v0.0.4/go.mod h1:jlNxxM8M8oNP362SXIR361TdNZuz6pTiYLrg9aTZMFM=
+github.com/go-bricks/bjaeger v0.0.6/go.mod h1:O8OJNh+pPi08CqPlR9JDyJqzaGJhiGpwNa6ZdDZi684=
 github.com/go-bricks/bprometheus v0.0.4/go.mod h1:lgNIpNVbOWb0ZJZRrgjI5voSEYLEkXN4R7FMX076F/o=
+github.com/go-bricks/bprometheus v0.0.6/go.mod h1:3iif/keeECDKJQFe8uol5lkF1cJWIU0dSCBLc/8MNs4=
 github.com/go-bricks/bviper v0.0.4/go.mod h1:vkmvw4kMJIyNYKPX6KvZNPzLzxdwQycSg7iTg+Q3/Do=
+github.com/go-bricks/bviper v0.0.6/go.mod h1:RsWeApG73XnigPCdWlWGbZO26pH2syKa3s+17axfT2c=
 github.com/go-bricks/bzerolog v0.0.4/go.mod h1:LPD3a2P29CuaQPqkLxgnYseVeL0uwF71U77OQnQpvyM=
+github.com/go-bricks/bzerolog v0.0.6/go.mod h1:vjDqcDuQ0w8gNUYF3ZBi/FS3t7KfDD3952tc2wpDeVs=
