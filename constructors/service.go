@@ -49,6 +49,7 @@ func (deps webServiceDependencies) pingService(ctx context.Context, service serv
 			tlsCredentials, err := utils.LoadTLSCredentials(tlsCfg.CaCertFile, tlsCfg.ServerKeyFile, tlsCfg.ServerCertFile)
 			if err != nil {
 				deps.Logger.Error(ctx, fmt.Sprintf("error to configure tls connection(check certificate files), err: %s", err.Error()))
+				return err
 			} else {
 				transportOption = grpc.WithTransportCredentials(tlsCredentials)
 			}
