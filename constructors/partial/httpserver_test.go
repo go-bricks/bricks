@@ -83,7 +83,7 @@ func (s *partialSuite) SetupTest() {
 	s.cfgMock.EXPECT().Get(confkeys.EnableGRPCTls).DoAndReturn(func(key string) cfg.Value {
 		value := mock_cfg.NewMockValue(s.ctrl)
 		value.EXPECT().IsSet().Return(true)
-		value.EXPECT().Bool().Return(true)
+		value.EXPECT().Bool().Return(false)
 		return value
 	})
 	// grpc tls caCertFile

@@ -90,20 +90,21 @@ func HTTPServerBuilder(deps httpServerDeps) serverInt.GRPCWebServiceBuilder {
 	}
 
 	if tlsConfig := deps.Config.Get(confkeys.GRPCTlsConfig); tlsConfig.IsSet() {
-		if enableTls := deps.Config.Get(confkeys.EnableGRPCTls); enableTls.IsSet() && enableTls.Bool() {
-			CaCertFile := deps.Config.Get(confkeys.GRPCTlsCACertFile)
-			ServerKeyFile := deps.Config.Get(confkeys.GRPCTlsServerKeyFile)
-			ServerCertFile := deps.Config.Get(confkeys.GRPCTlsServerCertFile)
-			if CaCertFile.IsSet() && ServerKeyFile.IsSet() && ServerCertFile.IsSet() {
-				cafn := CaCertFile.String()
-				skfn := ServerKeyFile.String()
-				scfn := ServerCertFile.String()
-				builder = builder.SetTlsConfig(true, cafn, skfn, scfn)
-				tlsCredentials, err := utils.LoadTLSCredentials(cafn, skfn, scfn)
-				if err == nil {
-					builder = builder.AddGRPCServerOptions(grpc.Creds(tlsCredentials))
-				}
+		CaCertFile := deps.Config.Get(confkeys.GRPCTlsCACertFile)
+		ServerKeyFile := deps.Config.Get(confkeys.GRPCTlsServerKeyFile)
+		ServerCertFile := deps.Config.Get(confkeys.GRPCTlsServerCertFile)
+		if enableTls := deps.Config.Get(confkeys.EnableGRPCTls); enableTls.IsSet() && enableTls.Bool() &&
+			CaCertFile.IsSet() && ServerKeyFile.IsSet() && ServerCertFile.IsSet() {
+			cafn := CaCertFile.String()
+			skfn := ServerKeyFile.String()
+			scfn := ServerCertFile.String()
+			builder = builder.SetTlsConfig(true, cafn, skfn, scfn)
+			tlsCredentials, err := utils.LoadTLSCredentials(cafn, skfn, scfn)
+			if err == nil {
+				builder = builder.AddGRPCServerOptions(grpc.Creds(tlsCredentials))
 			}
+		} else {
+			builder = builder.SetTlsConfig(false, "", "", "")
 		}
 	}
 

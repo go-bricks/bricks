@@ -44,7 +44,7 @@ func (deps webServiceDependencies) pingService(ctx context.Context, service serv
 	if grpcAddress := deps.getGRPCAddress(ports); len(grpcAddress) > 0 {
 		var conn *grpc.ClientConn
 		transportOption := grpc.WithInsecure()
-		if tlsCfg.EnableTLS {
+		if tlsCfg != nil && tlsCfg.EnableTLS {
 			deps.Logger.Debug(ctx, "grpc TLS enabled")
 			tlsCredentials, err := utils.LoadTLSCredentials(tlsCfg.CaCertFile, tlsCfg.ServerKeyFile, tlsCfg.ServerCertFile)
 			if err != nil {
