@@ -93,18 +93,23 @@ func HTTPServerBuilder(deps httpServerDeps) serverInt.GRPCWebServiceBuilder {
 		CaCertFile := deps.Config.Get(confkeys.GRPCTlsCACertFile)
 		ServerKeyFile := deps.Config.Get(confkeys.GRPCTlsServerKeyFile)
 		ServerCertFile := deps.Config.Get(confkeys.GRPCTlsServerCertFile)
+		ClientKeyFile := deps.Config.Get(confkeys.GRPCTlsClientKeyFile)
+		ClientCertFile := deps.Config.Get(confkeys.GRPCTlsClientCertFile)
 		if enableTls := deps.Config.Get(confkeys.EnableGRPCTls); enableTls.IsSet() && enableTls.Bool() &&
-			CaCertFile.IsSet() && ServerKeyFile.IsSet() && ServerCertFile.IsSet() {
+			CaCertFile.IsSet() && ServerKeyFile.IsSet() && ServerCertFile.IsSet() && ClientKeyFile.IsSet() &&
+			ClientCertFile.IsSet() {
 			cafn := CaCertFile.String()
 			skfn := ServerKeyFile.String()
 			scfn := ServerCertFile.String()
-			builder = builder.SetTlsConfig(true, cafn, skfn, scfn)
+			ckfn := ClientKeyFile.String()
+			ccfn := ClientCertFile.String()
+			builder = builder.SetTlsConfig(true, cafn, skfn, scfn, ckfn, ccfn)
 			tlsCredentials, err := utils.LoadTLSCredentials(cafn, skfn, scfn)
 			if err == nil {
 				builder = builder.AddGRPCServerOptions(grpc.Creds(tlsCredentials))
 			}
 		} else {
-			builder = builder.SetTlsConfig(false, "", "", "")
+			builder = builder.SetTlsConfig(false, "", "", "", "", "")
 		}
 	}
 

@@ -8,7 +8,7 @@ import (
 	"io/ioutil"
 )
 
-func LoadTLSCredentials(CaCertFile string, ServerKeyFile string, ServerCertFile string) (credentials.TransportCredentials, error) {
+func LoadTLSCredentials(CaCertFile string, KeyFile string, CertFile string) (credentials.TransportCredentials, error) {
 	// Load certificate of the CA who signed client's certificate
 	pemClientCA, err := ioutil.ReadFile(CaCertFile)
 	if err != nil {
@@ -21,7 +21,7 @@ func LoadTLSCredentials(CaCertFile string, ServerKeyFile string, ServerCertFile 
 	}
 
 	// Load server's certificate and private key
-	serverCert, err := tls.LoadX509KeyPair(ServerCertFile, ServerKeyFile)
+	serverCert, err := tls.LoadX509KeyPair(KeyFile, CertFile)
 	if err != nil {
 		return nil, err
 	}

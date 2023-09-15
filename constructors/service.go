@@ -6,6 +6,7 @@ import (
 	"github.com/go-bricks/bricks/http/server/health"
 	"github.com/go-bricks/bricks/interfaces/http/server"
 	"github.com/go-bricks/bricks/interfaces/log"
+	"github.com/go-bricks/bricks/utils"
 	"go.uber.org/fx"
 	"google.golang.org/grpc"
 )
@@ -42,12 +43,20 @@ func (deps webServiceDependencies) pingService(ctx context.Context, service serv
 	tlsCfg := service.TlsConfig()
 	if grpcAddress := deps.getGRPCAddress(ports); len(grpcAddress) > 0 {
 		var conn *grpc.ClientConn
+		transportOption := grpc.WithInsecure()
 		if tlsCfg != nil && tlsCfg.EnableTLS {
 			deps.Logger.Debug(ctx, "grpc TLS enabled")
+			tlsCredentials, err := utils.LoadTLSCredentials(tlsCfg.CaCertFile, tlsCfg.ClientKeyFile, tlsCfg.ClientCertFile)
+			if err != nil {
+				deps.Logger.Error(ctx, fmt.Sprintf("error to configure tls connection(check certificate files), err: %s", err.Error()))
+				return err
+			} else {
+				transportOption = grpc.WithTransportCredentials(tlsCredentials)
+			}
 		} else {
 			deps.Logger.Debug(ctx, "grpc TLS disabled")
 		}
-		if conn, err = grpc.DialContext(ctx, grpcAddress, grpc.WithInsecure()); err == nil {
+		if conn, err = grpc.DialContext(ctx, grpcAddress, transportOption); err == nil {
 			defer conn.Close()
 			healthClient := health.NewHealthClient(conn)
 			_, err = healthClient.Check(ctx, &health.HealthCheckRequest{})

@@ -61,6 +61,16 @@ const (
 	// Type: string
 	GRPCTlsServerCertFile string = GRPCTlsConfig + ".serverCertFile"
 
+	// GRPCTlsClientKeyFile is client key file path
+	//
+	// Type: string
+	GRPCTlsClientKeyFile string = GRPCTlsConfig + ".clientKeyFile"
+
+	// GRPCTlsClientCertFile is client certificate file path
+	//
+	// Type: string
+	GRPCTlsClientCertFile string = GRPCTlsConfig + ".clientCertFile"
+
 	// ExternalRESTPort is the Port on which the webserver will serve it's external/public RESTful API
 	//
 	// Type: int

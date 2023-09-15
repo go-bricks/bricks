@@ -155,13 +155,16 @@ func (s *serviceBuilder) ListenOn(addr string) server.GRPCWebServiceBuilder {
 	return s
 }
 
-func (s *serviceBuilder) SetTlsConfig(enableTls bool, CaCertFile string, ServerKeyFile string, ServerCertFile string) server.GRPCWebServiceBuilder {
+func (s *serviceBuilder) SetTlsConfig(enableTls bool, CaCertFile string, ServerKeyFile string, ServerCertFile string,
+	ClientKeyFile string, ClientCertFile string) server.GRPCWebServiceBuilder {
 	s.ll.PushBack(func(cfg *webServiceConfig) {
 		cfg.grpc.tlsCfg = &server.TlsConfig{
 			EnableTLS:      enableTls,
 			CaCertFile:     CaCertFile,
 			ServerKeyFile:  ServerKeyFile,
 			ServerCertFile: ServerCertFile,
+			ClientKeyFile:  ClientKeyFile,
+			ClientCertFile: ClientCertFile,
 		}
 	})
 	return s
