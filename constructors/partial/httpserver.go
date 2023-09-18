@@ -104,7 +104,7 @@ func HTTPServerBuilder(deps httpServerDeps) serverInt.GRPCWebServiceBuilder {
 			ckfn := ClientKeyFile.String()
 			ccfn := ClientCertFile.String()
 			builder = builder.SetTlsConfig(true, cafn, skfn, scfn, ckfn, ccfn)
-			tlsCredentials, err := utils.LoadTLSCredentials(cafn, skfn, scfn)
+			tlsCredentials, err := utils.LoadTLSCredentials(cafn, skfn, scfn, utils.TLSserverConfig)
 			if err == nil {
 				builder = builder.AddGRPCServerOptions(grpc.Creds(tlsCredentials))
 			}

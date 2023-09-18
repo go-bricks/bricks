@@ -46,7 +46,7 @@ func (deps webServiceDependencies) pingService(ctx context.Context, service serv
 		transportOption := grpc.WithInsecure()
 		if tlsCfg != nil && tlsCfg.EnableTLS {
 			deps.Logger.Debug(ctx, "grpc TLS enabled")
-			tlsCredentials, err := utils.LoadTLSCredentials(tlsCfg.CaCertFile, tlsCfg.ClientKeyFile, tlsCfg.ClientCertFile)
+			tlsCredentials, err := utils.LoadTLSCredentials(tlsCfg.CaCertFile, tlsCfg.ClientKeyFile, tlsCfg.ClientCertFile, utils.TLSClientConfig)
 			if err != nil {
 				deps.Logger.Error(ctx, fmt.Sprintf("error to configure tls connection(check certificate files), err: %s", err.Error()))
 				return err

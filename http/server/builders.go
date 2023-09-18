@@ -237,7 +237,8 @@ func (s *serviceBuilder) Build() (server.WebService, error) {
 
 	if cfg.grpc.tlsCfg != nil && cfg.grpc.tlsCfg.EnableTLS && cfg.grpc.tlsCfg.CaCertFile != "" &&
 		cfg.grpc.tlsCfg.ServerKeyFile != "" && cfg.grpc.tlsCfg.ServerCertFile != "" {
-		tlsCredentials, err := utils.LoadTLSCredentials(cfg.grpc.tlsCfg.CaCertFile, cfg.grpc.tlsCfg.ServerKeyFile, cfg.grpc.tlsCfg.ServerCertFile)
+		tlsCredentials, err := utils.LoadTLSCredentials(cfg.grpc.tlsCfg.CaCertFile, cfg.grpc.tlsCfg.ServerKeyFile,
+			cfg.grpc.tlsCfg.ServerCertFile, utils.TLSserverConfig)
 		if err == nil {
 			cfg.grpc.options = append([]grpc.ServerOption{ // make sure they are outer most
 				grpc.Creds(tlsCredentials),

@@ -8,7 +8,14 @@ import (
 	"io/ioutil"
 )
 
-func LoadTLSCredentials(CaCertFile string, KeyFile string, CertFile string) (credentials.TransportCredentials, error) {
+type TLSConfigType string
+
+const (
+	TLSClientConfig TLSConfigType = "tlsClientConfig"
+	TLSserverConfig TLSConfigType = "tlsserverConfig"
+)
+
+func LoadTLSCredentials(CaCertFile string, KeyFile string, CertFile string, tlsConfig TLSConfigType) (credentials.TransportCredentials, error) {
 	// Load certificate of the CA who signed client's certificate
 	pemClientCA, err := ioutil.ReadFile(CaCertFile)
 	if err != nil {
@@ -21,16 +28,24 @@ func LoadTLSCredentials(CaCertFile string, KeyFile string, CertFile string) (cre
 	}
 
 	// Load server's certificate and private key
-	serverCert, err := tls.LoadX509KeyPair(CertFile, KeyFile)
+	tlsCert, err := tls.LoadX509KeyPair(CertFile, KeyFile)
 	if err != nil {
 		return nil, err
 	}
 
-	// Create the credentials and return it
-	config := &tls.Config{
-		Certificates: []tls.Certificate{serverCert},
-		ClientAuth:   tls.RequireAndVerifyClientCert,
-		ClientCAs:    certPool,
+	config := &tls.Config{}
+	switch tlsConfig {
+	case TLSserverConfig:
+		config = &tls.Config{
+			Certificates: []tls.Certificate{tlsCert},
+			ClientAuth:   tls.RequireAndVerifyClientCert,
+			ClientCAs:    certPool,
+		}
+	default:
+		config = &tls.Config{
+			Certificates: []tls.Certificate{tlsCert},
+			RootCAs:      certPool,
+		}
 	}
 
 	return credentials.NewTLS(config), nil
