@@ -21,7 +21,7 @@ func LoadTLSCredentials(CaCertFile string, KeyFile string, CertFile string) (cre
 	}
 
 	// Load server's certificate and private key
-	serverCert, err := tls.LoadX509KeyPair(KeyFile, CertFile)
+	serverCert, err := tls.LoadX509KeyPair(CertFile, KeyFile)
 	if err != nil {
 		return nil, err
 	}
