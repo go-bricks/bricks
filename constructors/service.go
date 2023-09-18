@@ -67,6 +67,8 @@ func (deps webServiceDependencies) pingService(ctx context.Context, service serv
 			deps.Logger.Debug(ctx, "Service is accepting %s calls on %s", info.Type, info.Address)
 		}
 		deps.Logger.Debug(ctx, "Service is up")
+	} else {
+		deps.Logger.Error(ctx, fmt.Sprintf("grpc connection error, err: %s", err.Error()))
 	}
 	return
 }

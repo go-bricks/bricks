@@ -42,9 +42,9 @@ func TestDefaultListeners(t *testing.T) {
 func TestListenOnAddresses(t *testing.T) {
 	service, err := Builder().
 		ListenOn("localhost:8888").
-		SetTlsConfig(true, "/home/demis/appo/test_certificate/ca-cert.pem",
-			"/home/demis/appo/test_certificate/server-key.pem",
-			"/home/demis/appo/test_certificate/server-cert.pem", "", "").
+		SetTlsConfig(true, "/ca-cert.pem",
+			"/server-key.pem",
+			"/server-cert.pem", "", "").
 		RegisterGRPCAPIs(registerGrpcAPI).
 		AddRESTServerConfiguration().
 		ListenOn("localhost:8887").
@@ -128,7 +128,8 @@ func TestInternalHealthService(t *testing.T) {
 func TestInternalHealthTLSService(t *testing.T) {
 	service, err := Builder().ListenOn("0.0.0.0:8888").
 		SetTlsConfig(true, "/ca-cert.pem",
-			"/server-key.pem", "/server-cert.pem", "", "").
+			"/server-key.pem", "/server-cert.pem",
+			"", "").
 		RegisterGRPCAPIs(registerGrpcAPI).RegisterGRPCAPIs(health.RegisterInternalHealthService).Build()
 	require.NoError(t, err)
 	defer service.Stop(context.Background())
