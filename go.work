@@ -12,13 +12,13 @@ use (
 )
 
 replace (
-	github.com/go-bricks/bjaeger v0.0.1 => ../bjaeger
-	github.com/go-bricks/bprometheus v0.0.1 => ../bprometheus
-	github.com/go-bricks/bricks  v0.0.2 => ./
-	github.com/go-bricks/bricks-template v0.0.1 => ../bricks-template
-	github.com/go-bricks/bviper v0.0.1 => ../bviper
-	github.com/go-bricks/bzerolog v0.0.1 => ../bzerolog
+	github.com/go-bricks/bjaeger v0.0.13 => ../bjaeger
+	github.com/go-bricks/bprometheus v0.0.13 => ../bprometheus
+	github.com/go-bricks/bricks  v0.0.13 => ./
+	github.com/go-bricks/bricks-template v0.0.13 => ../bricks-template
+	github.com/go-bricks/bviper v0.0.13 => ../bviper
+	github.com/go-bricks/bzerolog v0.0.13 => ../bzerolog
 	github.com/go-bricks/bricks-demo/workshop v0.0.0-20211102110000-000000000000 => ../bricks-demo/workshop
-	github.com/go-bricks/bricks-demo/subworkshop v0.0.1 => ../bricks-demo/subworkshop
+	github.com/go-bricks/bricks-demo/subworkshop v0.0.13 => ../bricks-demo/subworkshop
 )
 
