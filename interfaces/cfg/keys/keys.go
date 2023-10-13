@@ -71,6 +71,11 @@ const (
 	// Type: string
 	GRPCTlsClientCertFile string = GRPCTlsConfig + ".clientCertFile"
 
+	// GRPCTlsServerDomainName is the certificate domainName
+	//
+	// Type: string
+	GRPCTlsServerDomainName string = GRPCTlsConfig + ".serverDomainName"
+
 	// ExternalRESTPort is the Port on which the webserver will serve it's external/public RESTful API
 	//
 	// Type: int

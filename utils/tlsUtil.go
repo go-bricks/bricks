@@ -15,7 +15,7 @@ const (
 	TLSserverConfig TLSConfigType = "tlsserverConfig"
 )
 
-func LoadTLSCredentials(CaCertFile string, KeyFile string, CertFile string, tlsConfig TLSConfigType) (credentials.TransportCredentials, error) {
+func LoadTLSCredentials(CaCertFile string, KeyFile string, CertFile string, tlsConfig TLSConfigType, serverDomainName string) (credentials.TransportCredentials, error) {
 	// Load certificate of the CA who signed client's certificate
 	pemClientCA, err := ioutil.ReadFile(CaCertFile)
 	if err != nil {
@@ -43,8 +43,10 @@ func LoadTLSCredentials(CaCertFile string, KeyFile string, CertFile string, tlsC
 		}
 	default:
 		config = &tls.Config{
-			Certificates: []tls.Certificate{tlsCert},
-			RootCAs:      certPool,
+			Certificates:       []tls.Certificate{tlsCert},
+			ServerName:         serverDomainName,
+			RootCAs:            certPool,
+			InsecureSkipVerify: true,
 		}
 	}
 

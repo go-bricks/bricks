@@ -42,9 +42,10 @@ func TestDefaultListeners(t *testing.T) {
 func TestListenOnAddresses(t *testing.T) {
 	service, err := Builder().
 		ListenOn("localhost:8888").
-		SetTlsConfig(true, "/ca-cert.pem",
-			"/server-key.pem",
-			"/server-cert.pem", "", "").
+		SetTlsConfig(true, "rootCA.pem",
+			"server-key.pem",
+			"server.pem", "", "",
+			"serverDomainName").
 		RegisterGRPCAPIs(registerGrpcAPI).
 		AddRESTServerConfiguration().
 		ListenOn("localhost:8887").
@@ -127,16 +128,18 @@ func TestInternalHealthService(t *testing.T) {
 
 func TestInternalHealthTLSService(t *testing.T) {
 	service, err := Builder().ListenOn("0.0.0.0:8888").
-		SetTlsConfig(true, "/ca-cert.pem",
-			"/server-key.pem", "/server-cert.pem",
-			"", "").
+		SetTlsConfig(true, "rootCA.pem",
+			"server-key.pem",
+			"server.pem", "", "",
+			"serverDomainName").
 		RegisterGRPCAPIs(registerGrpcAPI).RegisterGRPCAPIs(health.RegisterInternalHealthService).Build()
 	require.NoError(t, err)
 	defer service.Stop(context.Background())
 	go service.Run(context.Background())
 
-	tlsCredentials, err := utils.LoadTLSCredentials("/ca-cert.pem", "/client-key.pem",
-		"/client-cert.pem", utils.TLSClientConfig)
+	tlsCredentials, err := utils.LoadTLSCredentials("rootCA.pem",
+		"client-key.pem",
+		"client.pem", utils.TLSClientConfig, "")
 	conn, err := grpc.Dial("0.0.0.0:8888", grpc.WithTransportCredentials(tlsCredentials))
 	require.NoError(t, err)
 	defer conn.Close()

@@ -103,13 +103,13 @@ func HTTPServerBuilder(deps httpServerDeps) serverInt.GRPCWebServiceBuilder {
 			scfn := ServerCertFile.String()
 			ckfn := ClientKeyFile.String()
 			ccfn := ClientCertFile.String()
-			builder = builder.SetTlsConfig(true, cafn, skfn, scfn, ckfn, ccfn)
-			tlsCredentials, err := utils.LoadTLSCredentials(cafn, skfn, scfn, utils.TLSserverConfig)
+			builder = builder.SetTlsConfig(true, cafn, skfn, scfn, ckfn, ccfn, deps.Config.Get(confkeys.GRPCTlsServerDomainName).String())
+			tlsCredentials, err := utils.LoadTLSCredentials(cafn, skfn, scfn, utils.TLSserverConfig, deps.Config.Get(confkeys.GRPCTlsServerDomainName).String())
 			if err == nil {
 				builder = builder.AddGRPCServerOptions(grpc.Creds(tlsCredentials))
 			}
 		} else {
-			builder = builder.SetTlsConfig(false, "", "", "", "", "")
+			builder = builder.SetTlsConfig(false, "", "", "", "", "", "")
 		}
 	}
 

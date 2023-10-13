@@ -30,12 +30,13 @@ type ListenInfo struct {
 
 // TlsConfig defines tls configuration
 type TlsConfig struct {
-	EnableTLS      bool   `json:"enableTLS"`
-	CaCertFile     string `json:"caCertFile"`
-	ServerKeyFile  string `json:"serverKeyFile"`
-	ServerCertFile string `json:"serverCertFile"`
-	ClientKeyFile  string `json:"clientKeyFile"`
-	ClientCertFile string `json:"clientCertFile"`
+	EnableTLS        bool   `json:"enableTLS"`
+	CaCertFile       string `json:"caCertFile"`
+	ServerKeyFile    string `json:"serverKeyFile"`
+	ServerCertFile   string `json:"serverCertFile"`
+	ClientKeyFile    string `json:"clientKeyFile"`
+	ClientCertFile   string `json:"clientCertFile"`
+	ServerDomainName string `json:"serverDomainName"`
 }
 
 // WebService defines our web service functions
@@ -52,7 +53,7 @@ type GRPCServerAPI func(server *grpc.Server)
 // GRPCWebServiceBuilder defines gRPC web service builder options
 type GRPCWebServiceBuilder interface {
 	ListenOn(addr string) GRPCWebServiceBuilder
-	SetTlsConfig(enableTls bool, CaCertFile string, ServerKeyFile string, ServerCertFile string, ClientKeyFile string, ClientCertFile string) GRPCWebServiceBuilder
+	SetTlsConfig(enableTls bool, CaCertFile string, ServerKeyFile string, ServerCertFile string, ClientKeyFile string, ClientCertFile string, ServerDomainName string) GRPCWebServiceBuilder
 	SetCustomGRPCServer(customServer *grpc.Server) GRPCWebServiceBuilder
 	SetCustomListener(listener net.Listener) GRPCWebServiceBuilder
 	RegisterGRPCAPIs(register ...GRPCServerAPI) GRPCWebServiceBuilder

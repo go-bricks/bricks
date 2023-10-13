@@ -46,6 +46,7 @@ func (s *partialSuite) TestExternalHTTPGroups() {
 		s.setupGroups(),
 		fx.Populate(&serverBuilder),
 	)
+
 	testApp.RequireStart()
 	defer testApp.RequireStop()
 

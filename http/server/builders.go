@@ -156,15 +156,16 @@ func (s *serviceBuilder) ListenOn(addr string) server.GRPCWebServiceBuilder {
 }
 
 func (s *serviceBuilder) SetTlsConfig(enableTls bool, CaCertFile string, ServerKeyFile string, ServerCertFile string,
-	ClientKeyFile string, ClientCertFile string) server.GRPCWebServiceBuilder {
+	ClientKeyFile string, ClientCertFile string, ServerDomainName string) server.GRPCWebServiceBuilder {
 	s.ll.PushBack(func(cfg *webServiceConfig) {
 		cfg.grpc.tlsCfg = &server.TlsConfig{
-			EnableTLS:      enableTls,
-			CaCertFile:     CaCertFile,
-			ServerKeyFile:  ServerKeyFile,
-			ServerCertFile: ServerCertFile,
-			ClientKeyFile:  ClientKeyFile,
-			ClientCertFile: ClientCertFile,
+			EnableTLS:        enableTls,
+			CaCertFile:       CaCertFile,
+			ServerKeyFile:    ServerKeyFile,
+			ServerCertFile:   ServerCertFile,
+			ClientKeyFile:    ClientKeyFile,
+			ClientCertFile:   ClientCertFile,
+			ServerDomainName: ServerDomainName,
 		}
 	})
 	return s
@@ -238,7 +239,7 @@ func (s *serviceBuilder) Build() (server.WebService, error) {
 	if cfg.grpc.tlsCfg != nil && cfg.grpc.tlsCfg.EnableTLS && cfg.grpc.tlsCfg.CaCertFile != "" &&
 		cfg.grpc.tlsCfg.ServerKeyFile != "" && cfg.grpc.tlsCfg.ServerCertFile != "" {
 		tlsCredentials, err := utils.LoadTLSCredentials(cfg.grpc.tlsCfg.CaCertFile, cfg.grpc.tlsCfg.ServerKeyFile,
-			cfg.grpc.tlsCfg.ServerCertFile, utils.TLSserverConfig)
+			cfg.grpc.tlsCfg.ServerCertFile, utils.TLSserverConfig, cfg.grpc.tlsCfg.ServerDomainName)
 		if err == nil {
 			cfg.grpc.options = append([]grpc.ServerOption{ // make sure they are outer most
 				grpc.Creds(tlsCredentials),
