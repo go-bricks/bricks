@@ -41,6 +41,11 @@ const (
 	// Type: int
 	ExternalGRPCPort string = gRPC + ".port"
 
+	// MaxRequestSize set request grpc size in MB
+	//
+	// Type: int
+	MaxRequestSize string = gRPC + ".maxRequestSize"
+
 	// EnableGRPCTls if true grpc use tls mutual authentication connection
 	//
 	// Type: bool

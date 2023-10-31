@@ -124,13 +124,14 @@ func (r *restBuilder) BuildRESTPart() server.GRPCWebServiceBuilder {
 // ******************************************************************************************************************************************************
 
 type grpcConfig struct {
-	addr         string
-	tlsCfg       *server.TlsConfig
-	server       *grpc.Server
-	listener     net.Listener
-	registerAPI  []server.GRPCServerAPI
-	options      []grpc.ServerOption
-	panicHandler func(interface{}) error
+	addr           string
+	tlsCfg         *server.TlsConfig
+	server         *grpc.Server
+	listener       net.Listener
+	registerAPI    []server.GRPCServerAPI
+	options        []grpc.ServerOption
+	panicHandler   func(interface{}) error
+	maxRequestSize int
 }
 
 type webServiceConfig struct {
@@ -151,6 +152,13 @@ func Builder() server.GRPCWebServiceBuilder {
 func (s *serviceBuilder) ListenOn(addr string) server.GRPCWebServiceBuilder {
 	s.ll.PushBack(func(cfg *webServiceConfig) {
 		cfg.grpc.addr = addr
+	})
+	return s
+}
+
+func (s *serviceBuilder) SetMaxRequestSize(maxSize int) server.GRPCWebServiceBuilder {
+	s.ll.PushBack(func(cfg *webServiceConfig) {
+		cfg.grpc.maxRequestSize = maxSize
 	})
 	return s
 }
@@ -245,6 +253,12 @@ func (s *serviceBuilder) Build() (server.WebService, error) {
 				grpc.Creds(tlsCredentials),
 			}, cfg.grpc.options...)
 		}
+	}
+
+	if cfg.grpc.maxRequestSize != 0 {
+		cfg.grpc.options = append([]grpc.ServerOption{
+			grpc.MaxRecvMsgSize(cfg.grpc.maxRequestSize),
+		}, cfg.grpc.options...)
 	}
 
 	cfg.grpc.options = append([]grpc.ServerOption{ // make sure they are outer most

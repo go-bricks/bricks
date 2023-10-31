@@ -61,6 +61,7 @@ type GRPCWebServiceBuilder interface {
 	SetPanicHandler(handler func(interface{}) error) GRPCWebServiceBuilder
 	SetLogger(logger func(ctx context.Context, format string, args ...interface{})) GRPCWebServiceBuilder
 	AddRESTServerConfiguration() RESTBuilder
+	SetMaxRequestSize(maxSize int) GRPCWebServiceBuilder
 	Build() (WebService, error)
 }
 

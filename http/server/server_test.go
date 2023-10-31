@@ -148,6 +148,22 @@ func TestInternalHealthTLSService(t *testing.T) {
 	require.NoError(t, err)
 }
 
+func TestInternalserverRequestSize(t *testing.T) {
+	service, err := Builder().ListenOn("0.0.0.0:8888").
+		SetMaxRequestSize(1024 * 1024 * 30).
+		RegisterGRPCAPIs(registerGrpcAPI).RegisterGRPCAPIs(health.RegisterInternalHealthService).Build()
+	require.NoError(t, err)
+	defer service.Stop(context.Background())
+	go service.Run(context.Background())
+
+	conn, err := grpc.Dial("0.0.0.0:8888", grpc.WithInsecure())
+	require.NoError(t, err)
+	defer conn.Close()
+	healthClient := health.NewHealthClient(conn)
+	_, err = healthClient.Check(context.Background(), &health.HealthCheckRequest{})
+	require.NoError(t, err)
+}
+
 func TestCustomGrpcServerOptions(t *testing.T) {
 	service, err := Builder().
 		ListenOn("localhost:8888").

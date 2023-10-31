@@ -113,6 +113,10 @@ func HTTPServerBuilder(deps httpServerDeps) serverInt.GRPCWebServiceBuilder {
 		}
 	}
 
+	if grpcMaxSize := deps.Config.Get(confkeys.MaxRequestSize); grpcMaxSize.IsSet() {
+		builder = builder.SetMaxRequestSize(grpcMaxSize.Int())
+	}
+
 	// GRPC server interceptors
 	if len(deps.UnaryInterceptors) > 0 {
 		interceptorsOption := grpc.ChainUnaryInterceptor(deps.UnaryInterceptors...)
