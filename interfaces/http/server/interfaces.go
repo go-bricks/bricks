@@ -62,6 +62,7 @@ type GRPCWebServiceBuilder interface {
 	SetLogger(logger func(ctx context.Context, format string, args ...interface{})) GRPCWebServiceBuilder
 	AddRESTServerConfiguration() RESTBuilder
 	SetMaxRequestSize(maxSize int) GRPCWebServiceBuilder
+	SetMaxSendMessageSize(maxSize int) GRPCWebServiceBuilder
 	Build() (WebService, error)
 }
 

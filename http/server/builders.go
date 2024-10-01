@@ -132,6 +132,7 @@ type grpcConfig struct {
 	options        []grpc.ServerOption
 	panicHandler   func(interface{}) error
 	maxRequestSize int
+	maxSendMessageSize int
 }
 
 type webServiceConfig struct {
@@ -159,6 +160,13 @@ func (s *serviceBuilder) ListenOn(addr string) server.GRPCWebServiceBuilder {
 func (s *serviceBuilder) SetMaxRequestSize(maxSize int) server.GRPCWebServiceBuilder {
 	s.ll.PushBack(func(cfg *webServiceConfig) {
 		cfg.grpc.maxRequestSize = maxSize
+	})
+	return s
+}
+
+func (s *serviceBuilder) SetMaxSendMessageSize(maxSize int) server.GRPCWebServiceBuilder {
+	s.ll.PushBack(func(cfg *webServiceConfig) {
+		cfg.grpc.maxSendMessageSize = maxSize
 	})
 	return s
 }
@@ -258,6 +266,12 @@ func (s *serviceBuilder) Build() (server.WebService, error) {
 	if cfg.grpc.maxRequestSize != 0 {
 		cfg.grpc.options = append([]grpc.ServerOption{
 			grpc.MaxRecvMsgSize(cfg.grpc.maxRequestSize),
+		}, cfg.grpc.options...)
+	}
+
+	if cfg.grpc.maxSendMessageSize != 0 {
+		cfg.grpc.options = append([]grpc.ServerOption{
+			grpc.MaxSendMsgSize(cfg.grpc.maxSendMessageSize),
 		}, cfg.grpc.options...)
 	}
 

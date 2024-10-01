@@ -46,6 +46,11 @@ const (
 	// Type: int
 	MaxRequestSize string = gRPC + ".maxRequestSize"
 
+	// MaxSendMessageSize set response grpc size in MB
+	//
+	// Type: int
+	MaxSendMessageSize string = gRPC + ".maxSendMessageSize"
+
 	// EnableGRPCTls if true grpc use tls mutual authentication connection
 	//
 	// Type: bool
