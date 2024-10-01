@@ -41,7 +41,7 @@ func TestDefaultListeners(t *testing.T) {
 
 func TestListenOnAddresses(t *testing.T) {
 	service, err := Builder().
-		ListenOn("localhost:8888").
+		ListenOn("localhost:").
 		SetTlsConfig(true, "rootCA.pem",
 			"server-key.pem",
 			"server.pem", "", "",
